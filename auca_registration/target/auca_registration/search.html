@@ -134,7 +134,7 @@
             <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
         </div>
         <h2>Search Redirect</h2>
-        <form id="searchForm">
+        <form id="searchForm" method="get" action="search">
             <div class="form-group">
                 <label for="query">Search Query:</label>
                 <input type="text" id="query" name="query" placeholder="Enter your search term..." required>
@@ -146,25 +146,5 @@
         </div>
         <a href="index.html" class="back-link">← Back to Home</a>
     </div>
-
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get search query value
-            const query = document.getElementById('query').value.trim();
-            
-            if (query) {
-                // Encode the query for URL
-                const encodedQuery = encodeURIComponent(query);
-                
-                // Construct Google search URL
-                const googleURL = `https://www.google.com/search?q=${encodedQuery}`;
-                
-                // Redirect to Google
-                window.location.href = googleURL;
-            }
-        });
-    </script>
 </body>
 </html>

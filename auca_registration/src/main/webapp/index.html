@@ -214,7 +214,7 @@
 <body>
     <div class="container">
         <h1>Welcome Back!</h1>
-        <form id="login" method="post">
+        <form id="loginForm" action="login" method="post">
             <label for="userName">User Name:</label>
             <input type="text" name="userName" id="userName" placeholder="Enter your name" required>
             
@@ -228,27 +228,6 @@
     </div>
 
     <script>
-        // // Handle form submission
-        // document.getElementById('login').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-            
-        //     // Get form values
-        //     const username = document.getElementById('userName').value;
-        //     const password = document.getElementById('userPassword').value;
-            
-        //     // Check password length
-        //     if (password.length < 8) {
-        //         // Weak password - show message and stay on page
-        //         const messageDiv = document.getElementById('message');
-        //         messageDiv.className = 'message weak show';
-        //         messageDiv.innerHTML = `<strong>Hello ${username}</strong>, your password is weak. Try a strong one.`;
-        //     } else {
-        //         // Strong password - navigate to search.html
-        //         window.location.href = 'search.html';
-        //     }
-        // });
-
-        // Create floating sparkles for styling
         function createSparkle() {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
