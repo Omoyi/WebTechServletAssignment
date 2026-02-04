@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkle Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffd6e8 0%, #fff0f5 50%, #ffe4f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating sparkle animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 192, 203, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.5); }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ffb6d9 0%, #ff69b4 100%);
+            border-radius: 50%;
+            animation: float 6s infinite, shimmer 3s infinite;
+            z-index: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 60px rgba(255, 105, 180, 0.2), 
+                        0 0 40px rgba(255, 192, 203, 0.4),
+                        inset 0 0 30px rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            z-index: 10;
+            border: 2px solid rgba(255, 192, 203, 0.3);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #ff69b4, #ffb6d9, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            color: #ff1493;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 15px;
+            border: 2px solid #ffb6d9;
+            border-radius: 15px;
+            font-size: 1em;
+            background: rgba(255, 240, 245, 0.8);
+            color: #333;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #ff69b4;
+            background: rgba(255, 240, 245, 1);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4),
+                        inset 0 0 10px rgba(255, 192, 203, 0.2);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #ffb6d9;
+        }
+
+        input[type="submit"] {
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.6),
+                        0 0 30px rgba(255, 192, 203, 0.5);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
+        input[type="submit"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+        }
+
+        input[type="submit"]:hover::after {
+            animation: ripple 0.6s ease-out;
+        }
+
+        @keyframes ripple {
+            to {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* Message styles */
+        .message {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.1em;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .message.weak {
+            background: linear-gradient(135deg, #ffe0e0 0%, #ffcccc 100%);
+            border: 2px solid #ff6b6b;
+            color: #d32f2f;
+        }
+
+        .message.strong {
+            background: linear-gradient(135deg, #e0ffe0 0%, #ccffcc 100%);
+            border: 2px solid #6bff6b;
+            color: #2f7d32;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome Back!</h1>
+        <form id="login" method="post">
+            <label for="userName">User Name:</label>
+            <input type="text" name="userName" id="userName" placeholder="Enter your name" required>
+            
+            <label for="userPassword">Password:</label>
+            <input type="password" name="userPassword" id="userPassword" placeholder="Enter your password" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+        
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // // Handle form submission
+        // document.getElementById('login').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+            
+        //     // Get form values
+        //     const username = document.getElementById('userName').value;
+        //     const password = document.getElementById('userPassword').value;
+            
+        //     // Check password length
+        //     if (password.length < 8) {
+        //         // Weak password - show message and stay on page
+        //         const messageDiv = document.getElementById('message');
+        //         messageDiv.className = 'message weak show';
+        //         messageDiv.innerHTML = `<strong>Hello ${username}</strong>, your password is weak. Try a strong one.`;
+        //     } else {
+        //         // Strong password - navigate to search.html
+        //         window.location.href = 'search.html';
+        //     }
+        // });
+
+        // Create floating sparkles for styling
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.animation = `float ${4 + Math.random() * 2}s infinite, shimmer ${2 + Math.random() * 1}s infinite`;
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 8000);
+        }
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 300);
+
+        // Create initial sparkles
+        for (let i = 0; i < 5; i++) {
+            createSparkle();
+        }
+    </script>
+</body>
+</html>

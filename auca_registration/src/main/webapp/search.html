@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Redirect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f33da4 0%, #eb5527 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .search-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .google-logo {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .google-logo span:nth-child(1) { color: #4285f4; }
+        .google-logo span:nth-child(2) { color: #ea4335; }
+        .google-logo span:nth-child(3) { color: #fbbc05; }
+        .google-logo span:nth-child(4) { color: #4285f4; }
+        .google-logo span:nth-child(5) { color: #34a853; }
+        .google-logo span:nth-child(6) { color: #ea4335; }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #ddd;
+            border-radius: 24px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f4429b;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f33da4 0%, #eb5527 100%);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(66, 133, 244, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-left: 4px solid #d342f4;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .info strong {
+            color: #c542f4;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #f49242;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <div class="google-logo">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </div>
+        <h2>Search Redirect</h2>
+        <form id="search">
+            <div class="form-group">
+                <label for="query">Search Query:</label>
+                <input type="text" id="query" name="query" placeholder="Enter your search term..." required>
+            </div>
+            <button type="submit">Fetch</button>
+        </form>
+        <div class="info">
+            <strong>ℹ Info:</strong> When you click "Fetch", you will be redirected to Google with your search query.
+        </div>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <!-- <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get search query value
+            const query = document.getElementById('query').value.trim();
+            
+            if (query) {
+                // Encode the query for URL
+                const encodedQuery = encodeURIComponent(query);
+                
+                // Construct Google search URL
+                const googleURL = `https://www.google.com/search?q=${encodedQuery}`;
+                
+                // Redirect to Google
+                window.location.href = googleURL;
+            }
+        });
+    </script> -->
+</body>
+</html>
