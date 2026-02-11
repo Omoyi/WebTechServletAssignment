@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping
 public class ProductController {
 
     private List<Product> products = new ArrayList<>();
 
     public ProductController() {
-        // Requirement: Initialize 10 products
         products.add(new Product(1L, "Laptop", "Electronics", 1200.0, 15));
         products.add(new Product(2L, "Smartphone", "Electronics", 800.0, 25));
         products.add(new Product(3L, "Desk Chair", "Furniture", 150.0, 10));

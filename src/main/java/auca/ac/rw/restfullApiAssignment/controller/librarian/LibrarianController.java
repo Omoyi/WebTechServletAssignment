@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping
 public class LibrarianController {
 
     private List<Librarian> librarians = new ArrayList<>();
